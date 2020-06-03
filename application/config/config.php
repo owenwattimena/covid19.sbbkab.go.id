@@ -24,8 +24,8 @@ date_default_timezone_set("Asia/Jayapura");
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://covid19_sbbkab.test';
-// $config['base_url'] = 'https://covid19.sbbkab.go.id';
+// $config['base_url'] = 'http://covid19_sbbkab.test';
+$config['base_url'] = 'https://covid19.sbbkab.go.id';
 // $config['base_url'] = 'http://localhost/covid19_sbbkab';
 
 /*
