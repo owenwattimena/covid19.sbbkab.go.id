@@ -87,3 +87,4 @@ defined('EXIT__AUTO_MAX')      or define('EXIT__AUTO_MAX', 125); // highest auto
 
 
 define('TIMESTAMP_FORMAT', "Y-m-d H:i:s");
+define('FILE_UPLOAD_SIZE', 1024);

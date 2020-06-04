@@ -43,7 +43,7 @@ class Covid
         $config['upload_path']          = './uploads/media/gambar/';
         // $config['allowed_types']        = 'gif|jpg|jpeg|png';
         $config['allowed_types']        = '*';
-        $config['max_size']             = 1024;
+        $config['max_size']             = FILE_UPLOAD_SIZE;
         $config['max_width']            = 1024;
         $config['max_height']           = 1024;
         $config['encrypt_name']           = TRUE;

@@ -154,7 +154,10 @@ class Api extends CI_Controller
             switch ($table) {
                 case 'media':
                     # code...
-                    $this->_remove_file($table, $id, './uploads/media/gambar/', 'source');
+                    if ($this->general_model->get_where($table, ['id' => $id, 'type' => 'image'])) {
+
+                        $this->_remove_file($table, $id, './uploads/media/gambar/', 'source');
+                    }
                     break;
             }
             $response = $this->general_model->remove_data($table, $id);
@@ -176,9 +179,12 @@ class Api extends CI_Controller
         $data_otg = $this->general_model->get_data('media');
         foreach ($data_otg as $key => $value) {
             # code...
-            // echo json_encode($value);
-            // die;
-            $data_otg[$key]->source = base_url('/uploads/media/gambar/') . $value->source;
+
+            if ($data_otg[$key]->type == 'image') {
+                $data_otg[$key]->source_detail = base_url('/uploads/media/gambar/') . $value->source;
+            } else {
+                $data_otg[$key]->source_detail = 'https://www.youtube.com/watch?v=' . $value->source;
+            }
         }
         echo json_encode($data_otg);
     }
@@ -229,6 +235,9 @@ class Api extends CI_Controller
             }
         }
     }
+
+
+
 
     private function _remove_file($table, $id, $path = './uploads/media/gambar/', $field = 'source')
     {

@@ -11,7 +11,7 @@
                 </button>
             </div>
             <!-- /.card-header -->
-            <div class="card-body" id="table" data-rm-hotline="<?= base_url('/api/removeData') ?>">
+            <div class="card-body" id="table" data-rm-data="<?= base_url('/api/removeData') ?>">
                 <div class="table-responsive">
 
                     <table id="example1" class="table table-bordered table-striped">
@@ -67,11 +67,11 @@
 
                 <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
                     <li class="nav-item nav-img">
-                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#image" role="tab"
+                        <a class="nav-link active" id="image-tab" data-toggle="tab" href="#image" role="tab"
                             aria-controls="home" aria-selected="true">Gambar</a>
                     </li>
                     <li class="nav-item nav-video">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#video" role="tab"
+                        <a class="nav-link" id="video-tab" data-toggle="tab" href="#video" role="tab"
                             aria-controls="profile" aria-selected="false">Video</a>
                     </li>
                 </ul>
@@ -87,7 +87,7 @@
                                 <label for="source-img">Gambar</label>
                                 <input required type="file" accept="image/*" name="source" value class="form-control"
                                     id="source-img">
-                                <small>Dimensi gambar yang disarankan 960x960 </small>
+                                <small>Dimensi gambar yang disarankan 960x960. Ukuran Max. 1MB </small>
                             </div>
                             <div class="row justify-content-center">
 
@@ -116,8 +116,9 @@
                             <input type="hidden" name="type" value="video">
                             <div class="form-group">
                                 <label for="source-video">Video</label>
-                                <input required type="text" name="source" value class="form-control" id="source-video">
-
+                                <input required type="text" name="source" placeholder="Id Video YouTube" value
+                                    class="form-control" id="source-video">
+                                <small>https://www.youtube.com/watch?v=<b class="bg-success">id_video</b></small>
                             </div>
                             <div class="form-group">
                                 <label for="keterangan-video">Keterangan</label>
@@ -153,14 +154,15 @@ function showDataTable() {
         processData: false,
         contentType: false,
         success: function(response) {
-            console.log(response);
+            // console.log(response);
             let template = '';
 
             response.forEach(element => {
                 template += `<tr class='tb-row'>`;
                 template += `<td>#</td>`;
                 template += `<td class="type">${element.type}</td>`;
-                template += `<td class="source">${element.source}</td>`;
+                template +=
+                    `<td class="source">${element.source} <a target="_blank" href="${element.source_detail}"><sup><i class="fa fa-external-link-alt"></i></sup></a></td>`;
                 template += `<td class="keterangan">${element.keterangan}</td>`;
                 template += `<td>${element.created_at}</td>`;
                 template +=
@@ -185,11 +187,18 @@ $('#source-img').on('change', function() {
 
 function gambar(a) {
     if (a.files && a.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            $('#show-img').attr('src', e.target.result);
+        if (a.files[0].size * 0.001 <= `<?= FILE_UPLOAD_SIZE ?>`) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#show-img').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(a.files[0]);
+        } else {
+            $('#source-img').val('');
+            showToast('error', 'Ukuran berkas yang anda coba unggah lebih besar ukuran yang diperbolehkan.')
+            $('#show-img').attr('src', `<?= base_url('uploads/media/gambar/default.jpg ') ?>`);
         }
-        reader.readAsDataURL(a.files[0]);
     }
 
 }
@@ -210,7 +219,8 @@ $(document).ready(function() {
         $('#keterangan-video').val('');
         $('#keterangan-img').val('');
         $('#no_hp').val('');
-
+        $('.nav-video').removeClass('d-none')
+        $('#video').removeClass('d-none')
         $('#source-img').attr('required', 'required');
     })
 
@@ -223,21 +233,51 @@ $(document).ready(function() {
         let keterangan = $(this).parent().parent().find('.keterangan').text();
         console.log(type);
         if (type == 'image') {
-            $('.nav-video').toggleClass('d-none')
-            $('#video').toggleClass('d-none')
+            $('.nav-img').removeClass('d-none')
+            $('#image').removeClass('d-none')
+
+            $('.nav-video').addClass('d-none')
+            $('#video').addClass('d-none')
+
+            $('#video-tab').removeClass('active')
+            $('#video').removeClass('active show')
+
+            $('#image-tab').addClass('active');
+            $('#image').addClass('active show');
+
             $('#show-img').attr('src', source);
             $('#source-img').removeAttr('required');
 
             // set id, nama, no_hp by id
             $('#keterangan-img').val(keterangan);
             $('#hidden-i_id').val($(this).data('id'));
+        } else {
+            $('.nav-img').addClass('d-none')
+            $('#image').addClass('d-none')
+
+            $('.nav-video').removeClass('d-none')
+            $('#video').removeClass('d-none')
+
+            //
+            $('#image-tab').removeClass('active')
+            $('#image').removeClass('active show')
+
+            $('#video-tab').addClass('active');
+            $('#video').addClass('active show');
+            //
+
+            // set id, nama, no_hp by id
+            $('#source-video').val(source);
+            $('#keterangan-video').val(keterangan);
+            $('#hidden-v_id').val($(this).data('id'));
+
         }
     })
 
     // remove data
     $(document).on('click', '.btn-remove', function() {
         if (confirm('Yakin ingin menghapus data?')) {
-            let url = $('#table').data('rm-hotline');
+            let url = $('#table').data('rm-data');
 
             let id = $(this).data('id');
             let table = 'media';

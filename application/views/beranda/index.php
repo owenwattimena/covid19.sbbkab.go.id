@@ -52,7 +52,6 @@ $CI->load->library('covid');
 
             <?php
             $updated = $info_update[0]->updated_at ?? 0;
-
             ?>
 
             <div class=" col-md-12 text-center mb-4">
@@ -165,7 +164,6 @@ $CI->load->library('covid');
             $positif_meninggal     = $positif[0]->meninggal ?? 0;
             $positif_kembali     = $positif[0]->kembali ?? 0;
             $positif_sembuh     = $positif[0]->sembuh ?? 0;
-
             ?>
 
             <div class="col-md-6 col-lg-4 mb-3">
@@ -220,26 +218,28 @@ $CI->load->library('covid');
 
                     <!-- Indicators -->
                     <ul class="carousel-indicators">
-                        <li data-target="#demo" data-slide-to="0" class="active"></li>
-                        <li data-target="#demo" data-slide-to="1"></li>
-                        <!-- <li data-target="#demo" data-slide-to="2"></li> -->
+                        <?php for ($i = 0; $i < count($media_image); $i++) : ?>
+                        <li data-target="#demo" data-slide-to="<?= $i ?>" class="<?= ($i == 0) ? 'active' : '' ?>"></li>
+                        <?php endfor; ?>
+
                     </ul>
 
                     <!-- The slideshow -->
                     <div class="carousel-inner">
-                        <div class="carousel-item active bg-primary" style="height: 750px;">
-                            <!-- <div class="overlay"></div> -->
+
+                        <?php foreach ($media_image as $key => $value) : ?>
+                        <div class="carousel-item <?= $key == 0 ? 'active' : '' ?> bg-primary" style="height: 750px;">
                             <div class="container">
                                 <div class="row ">
                                     <div class="col-md-12 text-center">
-                                        <img src="https://corona.demakkab.go.id/mapping_img/2020-05-29/tabel_sebaran.jpeg"
-                                            alt="" class="img-fluid " style="height: 750px;">
+                                        <img src="<?= base_url('/uploads/media/gambar/' . $value->source) ?>" alt=""
+                                            class="img-fluid " style="height: 750px;">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="carousel-item bg-success" style="height: 750px">
-                            <!-- <div class="overlay"></div> -->
+                        <?php endforeach; ?>
+                        <!-- <div class="carousel-item bg-success" style="height: 750px">
                             <div class="container">
                                 <div class="row slider-text px-4 d-flex align-items-center justify-content-center">
                                     <div class="col-md-12 text-center">
@@ -248,19 +248,7 @@ $CI->load->library('covid');
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- <div class="carousel-item bg-warning" style="height: 750px">
-									<div class="container">
-										<div
-											class="row slider-text px-4 d-flex align-items-center justify-content-center">
-											<div class="col-md-8 text w-100 text-center">
-												<h2 class="mb-4">Get Smash Free UI Kit</h2>
-												<p><a href="#" class="btn btn-outline-white btn-round">See all
-														components</a></p>
-											</div>
-										</div>
-									</div>
-								</div> -->
+                        </div> -->
                     </div>
 
                     <!-- Left and right controls -->
@@ -317,19 +305,22 @@ $CI->load->library('covid');
 
                     <!-- Indicators -->
                     <ul class="carousel-indicators">
-                        <li data-target="#video" data-slide-to="0" class="active"></li>
-                        <li data-target="#video" data-slide-to="1"></li>
+                        <?php foreach ($media_video as $key => $value) : ?>
+                        <li data-target="#video" data-slide-to="<?= $key ?>" class="<?= $key == 0 ? 'active' : '' ?>">
+                        </li>
+                        <?php endforeach; ?>
                     </ul>
 
                     <!-- The slideshow -->
                     <div class="carousel-inner">
-                        <div class="carousel-item active bg-primary" style="height: 500px;">
-                            <!-- <div class="overlay"></div> -->
+
+                        <?php foreach ($media_video as $key => $value) : ?>
+                        <div class="carousel-item <?= $key == 0 ? 'active' : '' ?> bg-primary" style="height: 500px;">
                             <div class="container">
                                 <div class="row ">
                                     <div class="col-md-12 text-center">
                                         <iframe style="width: 100%;" height="500px"
-                                            src="https://www.youtube.com/embed/tMT7jpX42-o" frameborder="0"
+                                            src="https://www.youtube.com/embed/<?= $value->source ?>" frameborder="0"
                                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                                             allowfullscreen></iframe>
                                     </div>
@@ -337,20 +328,7 @@ $CI->load->library('covid');
 
                             </div>
                         </div>
-                        <div class="carousel-item bg-success" style="height: 500px">
-                            <!-- <div class="overlay"></div> -->
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-12 text-center">
-                                        <iframe style="width: 100%;" height="500px"
-                                            src="https://www.youtube.com/embed/tMT7jpX42-o" frameborder="0"
-                                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                            allowfullscreen></iframe>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
+                        <?php endforeach; ?>
 
                     </div>
 
