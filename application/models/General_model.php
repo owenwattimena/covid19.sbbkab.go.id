@@ -13,6 +13,11 @@ class General_model extends CI_Model
         return $query->result_object();
     }
 
+    public function get($table)
+    {
+        return $this->db->get($table)->result_object();
+    }
+
     public function get_where($table, $conditions)
     {
         $this->db->where($conditions);

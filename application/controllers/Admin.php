@@ -153,4 +153,19 @@ class Admin extends CI_Controller
         $this->load->view('admin/templates/footer');
         $this->load->view('admin/templates/script');
     }
+
+    public function himbauan()
+    {
+        $data['current_menu'] = 'Himbauan';
+        $data['title'] = 'Himbauan';
+        // die;
+
+        $this->load->view('admin/templates/header', $data);
+        $this->load->view('admin/templates/navbar');
+        $this->load->view('admin/templates/aside');
+        $this->load->view('admin/templates/content-header');
+        $this->load->view('admin/himbauan/index');
+        $this->load->view('admin/templates/footer');
+        $this->load->view('admin/templates/script');
+    }
 }

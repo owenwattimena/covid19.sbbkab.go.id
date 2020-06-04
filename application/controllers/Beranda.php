@@ -32,6 +32,8 @@ class Beranda extends CI_Controller
 		$data['info_update'] = $this->covid_model->get_info_update();
 		$data['media_image'] = $this->general_model->get_where('media', ['type' => 'image']);
 		$data['media_video'] = $this->general_model->get_where('media', ['type' => 'video']);
+		$data['himbauan'] = $this->general_model->get('himbauan');
+
 		// var_dump($data['info_update']);
 		// die;
 

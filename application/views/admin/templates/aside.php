@@ -104,7 +104,8 @@ if (count($active_menu) <= 1) {
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link <?= $current_menu == 'Himbauan' ? 'active' : '' ?>">
+                    <a href="<?= base_url('/admin/himbauan') ?>"
+                        class="nav-link <?= $current_menu == 'Himbauan' ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-bullhorn"></i>
                         <p>
                             Himbauan

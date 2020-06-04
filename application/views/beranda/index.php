@@ -270,22 +270,12 @@ $CI->load->library('covid');
 <section class="ftco-section">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-9 text-center">
-                <h2 class="heading-section mb-4 pb-md-3">
+            <div class="col-md-9">
+                <h2 class="heading-section mb-4 pb-md-3 text-center">
                     Himbauan
                 </h2>
                 <p>
-                    Menghadapi saudara-saudara kita yang mudik ke Demak dari daerah lain maka diminta :
-
-                    Pemudik wajib melapor kepada RT/ RW setempat untuk diteruskan kepada kepala desa dan bidan
-                    desa setempat.
-                    Berdasarkan laporan tsb *Petugas kesehatan akan mengunjungi rumah saudara untuk dilakukan
-                    pemantauan/ pemeriksaan kesehatan.
-                    Warga sekitar harap tetap tenang dan membantu memberikan informasi kepada bidan desa
-                    setempat dan pemerintah desa, bila ada tetangga yg berasal dr luar daerah.
-                    Kepada para pemudik agar melaksanakan karantina mandiri di rumah masing2 selama 14 hari*
-                    sejak kedatangan.
-                    Gugus Tugas Percepatan Pengendalian Covid-19 Kabupaten Demak
+                    <?= $himbauan[0]->text ?? '' ?>
                 </p>
 
             </div>

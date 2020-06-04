@@ -45,6 +45,9 @@
 
     <!-- jQuery -->
     <script src="<?= base_url('/assets/admin') ?>/plugins/jquery/jquery.min.js"></script>
+
+
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">

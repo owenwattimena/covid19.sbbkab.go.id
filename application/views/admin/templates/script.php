@@ -45,6 +45,7 @@ $.widget.bridge('uibutton', $.ui.button)
 <script src="<?= base_url('/assets/admin') ?>/plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- Toastr -->
 <script src="<?= base_url('/assets/admin') ?>/plugins/toastr/toastr.min.js"></script>
+
 <script>
 $(function() {
     $("#example1").DataTable({

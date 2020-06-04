@@ -1,0 +1,29 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>CKEditor 5 – Classic editor</title>
+    <script src="ckeditor.js"></script>
+    <script src="filebrowser/plugin.js"></script>
+</head>
+<body>
+    <h1>Classic editor</h1>
+    <textarea name="content" id="editor">
+        &lt;p&gt;This is some sample content.&lt;/p&gt;
+    </textarea>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+
+CKEDITOR.editorConfig = function( config ) {
+    config.language = 'fr';
+    config.uiColor = '#000000';
+config.extraPlugins = 'filebrowser';
+};
+    </script>
+</body>
+</html>

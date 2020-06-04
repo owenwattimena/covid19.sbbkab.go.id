@@ -99,6 +99,16 @@ class Api extends CI_Controller
                     unset($post['id']); // remove id from post type hidden
                     $response = $this->general_model->save_data($table, $post);
                     break;
+                case 'himbauan':
+                    unset($post['created_by']);
+                    unset($post['created_at']);
+                    // $post['updated_by'] = '';
+                    // $post['updated_at'] = '';
+                    unset($post['id']); // remove id from post type hidden
+                    $response = $this->general_model->save_data($table, $post);
+                    // $response = $post;
+
+                    break;
                 case 'otg':
                 case 'odp':
                 case 'pdp':
@@ -236,7 +246,27 @@ class Api extends CI_Controller
         }
     }
 
+    public function getHimbauan()
+    {
+        $data = $this->general_model->get('himbauan');
+        echo json_encode($data);
+    }
 
+    public function postHimbauan()
+    {
+
+        $table = 'himbauan';
+
+        // $_POST['text'] = $this->db->escape_str($_POST['text']);
+
+        if ($this->input->post('id') <= 0) {
+            $this->_createData($table, $this->input->post());
+        } else {
+            // echo json_encode($_POST);
+            // die;
+            $this->_updateData($table, $this->input->post());
+        }
+    }
 
 
     private function _remove_file($table, $id, $path = './uploads/media/gambar/', $field = 'source')
