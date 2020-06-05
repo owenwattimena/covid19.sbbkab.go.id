@@ -29,6 +29,9 @@
     <link rel="stylesheet" href="<?= base_url() ?>/assets/site/css/icomoon.css">
     <link rel="stylesheet" href="<?= base_url() ?>/assets/site/css/style.css">
     <link rel="stylesheet" href="<?= base_url() ?>/assets/site/css/style.me.css">
+
+    <script src="<?= base_url() ?>/assets/site/js/jquery.min.js"></script>
+
 </head>
 
 <body>

@@ -113,7 +113,8 @@ if (count($active_menu) <= 1) {
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link <?= $current_menu == 'Infografis' ? 'active' : '' ?>">
+                    <a href="<?= base_url('/admin/infografis') ?>"
+                        class="nav-link <?= $current_menu == 'Infografis' ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-info-circle"></i>
                         <p>
                             Infografis

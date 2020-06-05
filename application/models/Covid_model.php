@@ -19,7 +19,6 @@ class Covid_model extends CI_Model
     {
         $status = '';
         $message = '';
-
         if ($this->db->insert($table, $data)) {
             $this->info_update($data);
             $status = 'success';
@@ -59,24 +58,24 @@ class Covid_model extends CI_Model
         return $query->result_object();
     }
 
-    public function remove_covid($table, $id)
-    {
-        $status = '';
-        $message = '';
-        // $builder = $this->db->table($table);
-        if (!$this->db->delete($table, array('id' => $id))) {
-            $status = 'error';
-            $message = 'Data gagal di hapus';
-        } else {
-            $status = 'success';
-            $message = 'Data berhasil di hapus';
-        }
+    // public function remove_covid($table, $id)
+    // {
+    //     $status = '';
+    //     $message = '';
+    //     // $builder = $this->db->table($table);
+    //     if (!$this->db->delete($table, array('id' => $id))) {
+    //         $status = 'error';
+    //         $message = 'Data gagal di hapus';
+    //     } else {
+    //         $status = 'success';
+    //         $message = 'Data berhasil di hapus';
+    //     }
 
-        $response = [
-            'status' => $status,
-            'message' => $message
-        ];
+    //     $response = [
+    //         'status' => $status,
+    //         'message' => $message
+    //     ];
 
-        return $response;
-    }
+    //     return $response;
+    // }
 }

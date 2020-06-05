@@ -4,13 +4,21 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Admin extends CI_Controller
 {
 
+    private $user;
+
+
     public function __construct()
     {
         parent::__construct();
+        $this->user = $this->session->user;
 
-        if (!isset($this->session->logged_in) || $this->session->logged_in != TRUE) {
+
+        if (!isset($this->session->logged_in) || $this->session->logged_in != TRUE || $this->user->id <= 0) {
             redirect('', 'location');
         }
+
+        // var_dump($this->user);
+        // die;
     }
 
     /**
@@ -165,6 +173,21 @@ class Admin extends CI_Controller
         $this->load->view('admin/templates/aside');
         $this->load->view('admin/templates/content-header');
         $this->load->view('admin/himbauan/index');
+        $this->load->view('admin/templates/footer');
+        $this->load->view('admin/templates/script');
+    }
+
+    public function infografis()
+    {
+        $data['current_menu'] = 'Infografis';
+        $data['title'] = 'Infografis';
+        // die;
+
+        $this->load->view('admin/templates/header', $data);
+        $this->load->view('admin/templates/navbar');
+        $this->load->view('admin/templates/aside');
+        $this->load->view('admin/templates/content-header');
+        $this->load->view('admin/infografis/index');
         $this->load->view('admin/templates/footer');
         $this->load->view('admin/templates/script');
     }

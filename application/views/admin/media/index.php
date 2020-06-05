@@ -186,8 +186,14 @@ $('#source-img').on('change', function() {
 })
 
 function gambar(a) {
+
+    // console.log(a.files[0]);
+
     if (a.files && a.files[0]) {
         if (a.files[0].size * 0.001 <= `<?= FILE_UPLOAD_SIZE ?>`) {
+
+            // if()
+
             var reader = new FileReader();
             reader.onload = function(e) {
                 $('#show-img').attr('src', e.target.result);
@@ -245,7 +251,7 @@ $(document).ready(function() {
             $('#image-tab').addClass('active');
             $('#image').addClass('active show');
 
-            $('#show-img').attr('src', source);
+            $('#show-img').attr('src', `<?= base_url('/uploads/media/gambar/') ?>` + source);
             $('#source-img').removeAttr('required');
 
             // set id, nama, no_hp by id

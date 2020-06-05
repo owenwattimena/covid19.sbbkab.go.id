@@ -36,7 +36,6 @@
             stroke="#F96D00" /></svg></div>
 
 
-<script src="<?= base_url() ?>/assets/site/js/jquery.min.js"></script>
 <script src="<?= base_url() ?>/assets/site/js/jquery-migrate-3.0.1.min.js"></script>
 <script src="<?= base_url() ?>/assets/site/js/popper.min.js"></script>
 <script src="<?= base_url() ?>/assets/site/js/bootstrap.min.js"></script>

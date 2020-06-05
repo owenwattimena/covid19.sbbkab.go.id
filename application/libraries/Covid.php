@@ -35,12 +35,12 @@ class Covid
         return $format;
     }
 
-    public function upload_file($field)
+    public function upload_file($field, $path = './uploads/media/gambar/')
     {
 
         $CI = &get_instance();
 
-        $config['upload_path']          = './uploads/media/gambar/';
+        $config['upload_path']          = $path;
         // $config['allowed_types']        = 'gif|jpg|jpeg|png';
         $config['allowed_types']        = '*';
         $config['max_size']             = FILE_UPLOAD_SIZE;

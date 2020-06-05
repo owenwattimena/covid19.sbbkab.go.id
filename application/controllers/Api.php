@@ -10,8 +10,11 @@ class Api extends CI_Controller
     {
         parent::__construct();
         $this->load->helper(array('form'));
+        $this->user = $this->session->user;
 
-        if (!isset($this->session->logged_in) || $this->session->logged_in != TRUE) {
+        if (!isset($this->session->logged_in) || $this->session->logged_in != TRUE || $this->user->id <= 0) {
+
+
             $response = [
                 'status' => 'error',
                 'message' => 'tidak terautentikasi'
@@ -23,9 +26,6 @@ class Api extends CI_Controller
 
         $this->load->model('covid_model');
         $this->load->model('general_model');
-
-
-        $this->user = $this->session->user;
     }
 
     // Genaral method
@@ -109,6 +109,10 @@ class Api extends CI_Controller
                     // $response = $post;
 
                     break;
+                case 'infografis':
+                    unset($post['id']); // remove id from post type hidden
+                    $response = $this->general_model->save_data($table, $post);
+                    break;
                 case 'otg':
                 case 'odp':
                 case 'pdp':
@@ -169,6 +173,13 @@ class Api extends CI_Controller
                         $this->_remove_file($table, $id, './uploads/media/gambar/', 'source');
                     }
                     break;
+                case 'infografis':
+                    # code...
+                    if ($this->general_model->get_where($table, ['id' => $id])) {
+
+                        $this->_remove_file($table, $id, './uploads/infografis/', 'source');
+                    }
+                    break;
             }
             $response = $this->general_model->remove_data($table, $id);
 
@@ -202,6 +213,8 @@ class Api extends CI_Controller
 
     public function postMedia()
     {
+
+
 
         $table = 'media';
         if ($this->input->post('type') == 'image') {
@@ -255,6 +268,7 @@ class Api extends CI_Controller
     public function postHimbauan()
     {
 
+
         $table = 'himbauan';
 
         // $_POST['text'] = $this->db->escape_str($_POST['text']);
@@ -265,6 +279,59 @@ class Api extends CI_Controller
             // echo json_encode($_POST);
             // die;
             $this->_updateData($table, $this->input->post());
+        }
+    }
+
+
+    /**
+     * 
+     *  INFOGRAFIS
+     * 
+     */
+
+    public function getInfografis()
+    {
+        $data = $this->general_model->get_data('infografis');
+        foreach ($data as $key => $value) {
+            # code...
+            $data[$key]->source_detail = base_url('/uploads/infografis/') . $value->source;
+        }
+        echo json_encode($data);
+    }
+
+    public function postInfografis()
+    {
+
+        // echo json_encode($_POST);
+        // die;
+        $table = 'infografis';
+        $path = './uploads/infografis/';
+
+        if (empty($_FILES['source']['name'])) {
+            $this->_updateData($table, $this->input->post());
+        } else {
+            $this->load->library('covid');
+            $result = $this->covid->upload_file('source', $path);
+            if ($result['status'] == 'success') {
+                // echo json_encode($result);
+                $_POST['source'] = $result['upload_data']['file_name'];
+
+                if ($this->input->post('id') <= 0) {
+                    $this->_createData($table, $this->input->post());
+                } else {
+                    // get source data by id
+                    $data = $this->general_model->get_where($table, ['id' => $this->input->post('id')]);
+                    $this->load->helper('file');
+                    // delete source from directory
+                    if (!delete_files($path . $data[0]->source)) {
+                        unlink($path . $data[0]->source);
+                    }
+
+                    $this->_updateData($table, $this->input->post());
+                }
+            } else {
+                echo json_encode($result);
+            }
         }
     }
 
