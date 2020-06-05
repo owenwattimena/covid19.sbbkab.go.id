@@ -226,29 +226,34 @@ $CI->load->library('covid');
 
                     <!-- The slideshow -->
                     <div class="carousel-inner">
+                        <style>
+                        .carousel-item,
+                        .carousel-item img {
+                            height: 650px;
+                        }
 
+                        @media only screen and (max-width :480px) {
+
+                            .carousel-item,
+                            .carousel-item img {
+                                height: 400px;
+                            }
+
+                        }
+                        </style>
                         <?php foreach ($media_image as $key => $value) : ?>
-                        <div class="carousel-item <?= $key == 0 ? 'active' : '' ?> bg-primary" style="height: 750px;">
+                        <div class="carousel-item <?= $key == 0 ? 'active' : '' ?> bg-primary">
                             <div class="container">
                                 <div class="row ">
                                     <div class="col-md-12 text-center">
                                         <img src="<?= base_url('/uploads/media/gambar/' . $value->source) ?>" alt=""
-                                            class="img-fluid " style="height: 750px;">
+                                            class="img-fluid ">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <?php endforeach; ?>
-                        <!-- <div class="carousel-item bg-success" style="height: 750px">
-                            <div class="container">
-                                <div class="row slider-text px-4 d-flex align-items-center justify-content-center">
-                                    <div class="col-md-12 text-center">
-                                        <img src="https://corona.demakkab.go.id/mapping_img/2020-05-29/peta_sebaran.jpeg"
-                                            alt="" class="img-fluid " style="height: 750px;">
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
+
                     </div>
 
                     <!-- Left and right controls -->

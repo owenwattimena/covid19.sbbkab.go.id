@@ -1,6 +1,19 @@
 </div>
 <!-- ./wrapper -->
 
+<!-- loading -->
+<div id="ajax-loader" class="text-center center d-none" style="
+    background-color: rgba(0,0,0,0.3);
+    position: fixed; 
+    top: 0; bottom: 0;
+    right: 0; left: 0; 
+    z-index: 3000;">
+    <img style="position: absolute; top: 50%; margin-top: -70px"
+        src="<?= base_url('/assets/admin/img/ajax-loader.gif') ?>" alt="">
+</div>
+
+
+
 <!-- jQuery UI 1.11.4 -->
 <script src="<?= base_url('/assets/admin') ?>/plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -60,6 +73,15 @@ $(function() {
 
 });
 
+// var loader = function() {
+//     setTimeout(function() {
+//         if ($('#ftco-loader').length > 0) {
+//             $('#ftco-loader').removeClass('show');
+//         }
+//     }, 1);
+// };
+// loader();
+
 function showToast(icon, title) {
     const Toast = Swal.mixin({
         toast: true,
@@ -76,6 +98,8 @@ function showToast(icon, title) {
 
 function postData(url, formData) {
 
+    $('#ajax-loader').removeClass('d-none');
+
     // let url = $('#form').attr('action');
     return $.ajax({
         url: url,
@@ -85,6 +109,7 @@ function postData(url, formData) {
         processData: false,
         contentType: false,
         success: function(response) {
+            $('#ajax-loader').addClass('d-none');
             if (response.status == 'success') {
                 showToast('success', 'Data berhasil di simpan!');
                 $('#exampleModal').modal('hide')
@@ -98,6 +123,8 @@ function postData(url, formData) {
 
 
 function removeData(id, table, url) {
+    $('#ajax-loader').removeClass('d-none');
+
     let data = new FormData();
     data.append('table', table);
     data.append('id', id);
@@ -109,6 +136,7 @@ function removeData(id, table, url) {
         processData: false,
         contentType: false,
         success: function(response) {
+            $('#ajax-loader').addClass('d-none');
 
             if (response.status == 'success') {
                 showToast('success', 'Data berhasil di hapus!');

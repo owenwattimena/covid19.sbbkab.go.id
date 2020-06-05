@@ -47,6 +47,9 @@
     <script src="<?= base_url('/assets/admin') ?>/plugins/jquery/jquery.min.js"></script>
 
 
+    <script src="<?= base_url('/assets/admin/css/style.css') ?>"></script>
+
+
 
 </head>
 
