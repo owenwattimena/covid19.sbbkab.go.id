@@ -12,7 +12,7 @@
         <!-- Notifications Dropdown Menu -->
 
         <li class="nav-item">
-            <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+            <a class="nav-link" href="<?= base_url('/auth/logout') ?>">
                 <i class="fa fa-power-off"></i>
             </a>
         </li>

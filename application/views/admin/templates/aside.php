@@ -122,10 +122,11 @@ if (count($active_menu) <= 1) {
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link <?= $current_menu == 'User' ? 'active' : '' ?>">
+                    <a href="<?= base_url('/admin/users') ?>"
+                        class="nav-link <?= $current_menu == 'Users' ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-user"></i>
                         <p>
-                            User
+                            Users
                         </p>
                     </a>
                 </li>

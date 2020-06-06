@@ -16,7 +16,7 @@
                                         <i class="ion-ios-contact"></i>
                                     </span>
                                 </div>
-                                <input type="email" name="email" class="form-control" placeholder="Email">
+                                <input type="text" name="username" class="form-control" placeholder="Username">
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">

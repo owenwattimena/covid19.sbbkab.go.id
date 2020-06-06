@@ -98,7 +98,7 @@ function showToast(icon, title) {
 
 function postData(url, formData) {
 
-    $('#ajax-loader').removeClass('d-none');
+    ajaxStart();
 
     // let url = $('#form').attr('action');
     return $.ajax({
@@ -109,7 +109,7 @@ function postData(url, formData) {
         processData: false,
         contentType: false,
         success: function(response) {
-            $('#ajax-loader').addClass('d-none');
+            ajaxStop();
             if (response.status == 'success') {
                 showToast('success', 'Data berhasil di simpan!');
                 $('#exampleModal').modal('hide')
@@ -121,10 +121,18 @@ function postData(url, formData) {
     });
 }
 
-
-function removeData(id, table, url) {
+function ajaxStart() {
     $('#ajax-loader').removeClass('d-none');
 
+}
+
+function ajaxStop() {
+    $('#ajax-loader').addClass('d-none');
+
+}
+
+function removeData(id, table, url) {
+    ajaxStart();
     let data = new FormData();
     data.append('table', table);
     data.append('id', id);
@@ -136,8 +144,7 @@ function removeData(id, table, url) {
         processData: false,
         contentType: false,
         success: function(response) {
-            $('#ajax-loader').addClass('d-none');
-
+            ajaxStop();
             if (response.status == 'success') {
                 showToast('success', 'Data berhasil di hapus!');
 

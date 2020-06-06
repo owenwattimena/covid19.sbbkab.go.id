@@ -119,6 +119,14 @@ class Api extends CI_Controller
                 case 'positif_covid':
                     $response = $this->covid_model->save_covid($table, $post);
                     break;
+                case 'users':
+                    $post['roles'] = 'administrator';
+                    unset($post['ulang-password']);
+
+                    $this->load->model('auth_model');
+                    $response = $this->auth_model->post_user($table, $post);
+                    // $response = $post;
+                    break;
             }
 
             echo json_encode($response);
@@ -332,6 +340,65 @@ class Api extends CI_Controller
             } else {
                 echo json_encode($result);
             }
+        }
+    }
+
+
+    /**
+     * 
+     *  USERS
+     * 
+     */
+
+    public function getUsers()
+    {
+        $data = $this->general_model->get_where('users', ['roles' => 'administrator', 'deleted' => 0]);
+        echo json_encode($data);
+    }
+
+    public function postUsers()
+    {
+        // echo json_encode($_POST);
+        // die;
+        $table = 'users';
+        if ($this->input->post()) {
+            $post = $this->input->post();
+            if ($post['id'] <= 0) {
+                //create
+                $this->_createData($table, $post); // return json
+            } else {
+                // update
+                $this->load->model('auth_model');
+                $result = $this->auth_model->post_user($table, $post);
+                echo json_encode($result);
+            }
+
+            // $this->load->model('auth_model');
+            // $data = $this->auth_model->post_user($this->input->post());
+
+            // echo json_encode($data);
+        }
+    }
+
+    public function ubahPassword()
+    {
+
+        if ($this->input->post()) {
+
+            $this->load->model('auth_model');
+
+            $response = $this->auth_model->ubah_password($this->input->post());
+            echo json_encode($response);
+        }
+    }
+
+    public function removeUser()
+    {
+        if ($this->input->post()) {
+            $id = $this->input->post('id');
+            $this->load->model('auth_model');
+            $result = $this->auth_model->delete_user($id);
+            echo json_encode($result);
         }
     }
 

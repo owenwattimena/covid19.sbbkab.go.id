@@ -191,4 +191,19 @@ class Admin extends CI_Controller
         $this->load->view('admin/templates/footer');
         $this->load->view('admin/templates/script');
     }
+
+    public function users()
+    {
+        $data['current_menu'] = 'Users';
+        $data['title'] = 'Users';
+        // die;
+
+        $this->load->view('admin/templates/header', $data);
+        $this->load->view('admin/templates/navbar');
+        $this->load->view('admin/templates/aside');
+        $this->load->view('admin/templates/content-header');
+        $this->load->view('admin/users/index');
+        $this->load->view('admin/templates/footer');
+        $this->load->view('admin/templates/script');
+    }
 }

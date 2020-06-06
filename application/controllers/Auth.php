@@ -23,14 +23,13 @@ class Auth extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-
-        if (isset($this->session->logged_in) || $this->session->logged_in == TRUE) {
-            redirect('/admin/dashboard', 'location');
-        }
     }
 
     public function login()
     {
+        if (isset($this->session->logged_in) || $this->session->logged_in == TRUE) {
+            redirect('/admin/dashboard', 'location');
+        }
 
         if ($this->input->post()) {
             $response = $this->doLogin($this->input->post());
@@ -43,6 +42,12 @@ class Auth extends CI_Controller
         $this->load->view('templates/navbar');
         $this->load->view('admin/login');
         $this->load->view('templates/footer');
+    }
+
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect('/auth/login', 'location');
     }
 
     protected function doLogin($POST)
