@@ -38,8 +38,11 @@ class Auth extends CI_Controller
             }
             $this->session->set_flashdata('login_error', 'username dan password harus benar');
         }
+        $this->load->model('general_model');
 
-        $this->load->view('templates/header');
+        $data['pengaturan'] = $this->general_model->get('pengaturan');
+
+        $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
         $this->load->view('admin/login');
         $this->load->view('templates/footer');
