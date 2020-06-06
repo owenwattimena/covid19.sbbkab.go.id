@@ -9,12 +9,13 @@ class Auth_model extends CI_Model
         $status = 'error';
         $message = 'Akun tidak terautentikasi';
 
-        $email = $data['username'];
+        $username = $data['username'];
         $password = $data['password'];
 
         $this->db->select('*');
         $this->db->from('users');
-        $this->db->where('username', $email);
+        $this->db->where('username', $username);
+        $this->db->where('deleted', '0');
         $query = $this->db->get();
         $result = $query->row();
         // var_dump($result->id);
@@ -96,7 +97,7 @@ class Auth_model extends CI_Model
 
     public function get_user($username)
     {
-        return $this->db->get_where('users', ['username' => $username])->result_object();
+        return $this->db->get_where('users', ['username' => $username, 'deleted' => 0])->result_object();
     }
 
     public function delete_user($id)

@@ -210,13 +210,19 @@ $(document).ready(function() {
 
     $(document).on('click', '.remove', function() {
         if (confirm('Yakin ingin menghapus data?')) {
-            ajaxStart();
+
+
 
             let url = $('#table').data('rm-user');
 
             let id = $(this).data('id');
             let table = 'users';
-
+            if (current_user == id) {
+                if (!confirm('ada akan menghapus akun milik anda!?')) {
+                    return;
+                }
+            }
+            ajaxStart();
             let data = new FormData();
             data.append('id', id);
             $.ajax({
@@ -231,6 +237,9 @@ $(document).ready(function() {
                     if (response.status == 'success') {
                         showDataTable();
                         showToast('success', 'Data berhasil di hapus!');
+                        if (current_user == id) {
+                            window.location.href = `<?= base_url('/auth/logout') ?>`;
+                        }
                     } else {
                         showToast('error', 'Data gagal di hapus!');
                     }
