@@ -7,7 +7,14 @@
                     <form class="form-login" method="post" action="<?= base_url('/auth/login') ?>">
                         <div class="card-header card-header-primary text-center">
                             <h4 class="card-title">Login</h4>
-
+                            <?php if ($this->session->flashdata()) : ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <?= $this->session->flashdata('login_error') ?>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <?php endif; ?>
                         </div>
                         <div class="card-body px-4 pb-4 pt-2">
                             <div class="input-group mb-3">

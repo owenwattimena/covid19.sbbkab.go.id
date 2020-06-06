@@ -206,4 +206,108 @@ class Admin extends CI_Controller
         $this->load->view('admin/templates/footer');
         $this->load->view('admin/templates/script');
     }
+
+    public function pengaturan($params)
+    {
+        $this->load->model('general_model');
+
+        switch ($params) {
+
+            case 'halaman':
+
+
+                $data['current_menu'] = 'Pengaturan/halaman';
+                $data['title'] = 'Halaman';
+                $data['pengaturan'] = $this->general_model->get('pengaturan');
+                // die;
+
+                $this->load->view('admin/templates/header', $data);
+                $this->load->view('admin/templates/navbar');
+                $this->load->view('admin/templates/aside');
+                $this->load->view('admin/templates/content-header');
+                $this->load->view('admin/pengaturan/halaman/index', $data);
+                $this->load->view('admin/templates/footer');
+                $this->load->view('admin/templates/script');
+                break;
+            case 'kontak':
+                break;
+
+            default:
+                # code...
+                break;
+        }
+    }
+
+    public function ubah_halaman()
+    {
+        // var_dump($_POST);
+        // die;
+        $this->load->model('general_model');
+
+        $table = 'pengaturan';
+
+        if ($this->input->post()) {
+            $post = $this->input->post();
+
+            $path = './uploads/pengaturan/img/';
+
+            if ($_FILES['logo']['error'] == 0) {
+                $this->load->library('covid');
+                $result = $this->covid->upload_file('logo', $path);
+                if ($result['status'] == 'success') {
+
+                    $post['logo'] = $result['upload_data']['file_name'];
+
+
+                    $data = $this->general_model->get_where('pengaturan', ['id' => $post['id']]);
+
+                    if (isset($data[0]->logo) && $data[0]->logo != null) {
+
+                        $this->load->helper('file');
+                        // delete source from directory
+                        if (!delete_files($path . $data[0]->logo)) {
+                            unlink($path . $data[0]->logo);
+                        }
+                    }
+                } else {
+                    $this->covid->alert_message('error', 'alert-danger', $result['message']);
+                }
+            }
+
+            if ($_FILES['banner_source']['error'] == 0) {
+                $this->load->library('covid');
+                $result = $this->covid->upload_file('banner_source', './uploads/pengaturan/img/');
+                if ($result['status'] == 'success') {
+                    $post['banner_source'] = $result['upload_data']['file_name'];
+                    $data = $this->general_model->get_where('pengaturan', ['id' => $post['id']]);
+
+                    if (isset($data[0]->banner_source) && $data[0]->banner_source != null) {
+
+                        $this->load->helper('file');
+                        // delete source from directory
+                        if (!delete_files($path . $data[0]->banner_source)) {
+                            unlink($path . $data[0]->banner_source);
+                        }
+                    }
+                } else {
+                    $this->covid->alert_message('error', 'alert-danger', $result['message']);
+                }
+            }
+            if ($post['id'] <= 0) {
+                unset($post['id']);
+                $result = $this->general_model->save_data($table, $post);
+            } else {
+                $result = $this->general_model->save_data($table, $post);
+            }
+            $this->load->library('covid');
+            if ($result['status'] == 'success') {
+                $this->covid->alert_message('success', 'alert-success', 'Pengaturan berhasil di simpan');
+            } else {
+                $this->covid->alert_message('error', 'alert-danger', 'Pengaturan gagal di simpan');
+            }
+            // $this->session->set_flashdata('alert', `owen`);
+
+            redirect('/admin/pengaturan/halaman');
+        }
+    }
 }

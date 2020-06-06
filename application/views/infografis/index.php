@@ -1,4 +1,5 @@
-<section class="hero-wrap" style="height: 250px;background-image: url('<?= base_url() ?>/assets/site/images/bg_1.jpg');"
+<section class="hero-wrap"
+    style="height: 250px;background-image: url('<?= isset($pengaturan[0]->banner_source) && $pengaturan[0]->banner_source != null ? base_url('/uploads/pengaturan/img/' . $pengaturan[0]->banner_source) : base_url('/uploads/pengaturan/img/banner-default.jpg') ?>');"
     data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">

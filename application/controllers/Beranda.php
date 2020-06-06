@@ -24,6 +24,7 @@ class Beranda extends CI_Controller
 
 		$this->load->model('general_model');
 		$this->load->model('covid_model');
+		$data['pengaturan'] = $this->general_model->get('pengaturan');
 		$data['otg'] = $this->general_model->get_data('otg');
 		$data['odp'] = $this->general_model->get_data('odp');
 		$data['pdp'] = $this->general_model->get_data('pdp');
@@ -37,7 +38,7 @@ class Beranda extends CI_Controller
 		// var_dump($data['info_update']);
 		// die;
 
-		$this->load->view('templates/header');
+		$this->load->view('templates/header', $data);
 		$this->load->view('templates/navbar');
 		$this->load->view('beranda/index', $data);
 		$this->load->view('templates/footer');

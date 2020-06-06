@@ -36,6 +36,7 @@ class Auth extends CI_Controller
             if ($response['status'] == 'success') {
                 redirect('/admin/dashboard', 'location');
             }
+            $this->session->set_flashdata('login_error', 'username dan password harus benar');
         }
 
         $this->load->view('templates/header');

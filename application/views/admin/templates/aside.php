@@ -141,14 +141,14 @@ if (count($active_menu) <= 1) {
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="pages/layout/top-nav.html"
+                            <a href="<?= base_url('/admin/pengaturan/halaman') ?>"
                                 class="nav-link <?= $current_submenu == 'halaman' ? 'active' : '' ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Halaman</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/layout/top-nav-sidebar.html"
+                            <a href="<?= base_url('/admin/pengaturan/kontak') ?>"
                                 class="nav-link <?= $current_submenu == 'kontak' ? 'active' : '' ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Kontak</p>

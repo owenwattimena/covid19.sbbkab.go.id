@@ -24,10 +24,10 @@ class Infografis extends CI_Controller
 
         $this->load->model('general_model');
         $this->load->model('covid_model');
-
+        $data['pengaturan'] = $this->general_model->get('pengaturan');
         $data['infografis'] = $this->general_model->get('infografis');
 
-        $this->load->view('templates/header');
+        $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar');
         $this->load->view('infografis/index', $data);
         $this->load->view('templates/footer');

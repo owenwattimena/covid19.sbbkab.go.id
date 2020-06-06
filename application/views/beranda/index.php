@@ -4,15 +4,16 @@ $CI->load->library('covid');
 ?>
 
 
-<section class="hero-wrap" style="background-image: url('<?= base_url() ?>/assets/site/images/bg_1.jpg');"
+<section class="hero-wrap"
+    style="background-image: url('<?= isset($pengaturan[0]->banner_source) && $pengaturan[0]->banner_source != null ? base_url('/uploads/pengaturan/img/' . $pengaturan[0]->banner_source) : base_url('/uploads/pengaturan/img/banner-default.jpg') ?>');"
     data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">
         <div class="row description align-items-center justify-content-center">
             <div class="col-md-8 text-center">
                 <div class="text">
-                    <h2 class="mb-5 text-sandybrown">Kabubaten Seram Bagian Barat Tanggap Covid-19</h2>
-                    <p>Pusat Informasi Seputar Covid-19 Di Kabupaten SBB</p>
+                    <h2 class="mb-5 text-sandybrown"> <?= $pengaturan ? $pengaturan[0]->banner_title : '' ?> </h2>
+                    <p><?= $pengaturan ? $pengaturan[0]->banner_subtitle : '' ?></p>
                 </div>
             </div>
         </div>

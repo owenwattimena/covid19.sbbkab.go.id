@@ -44,8 +44,8 @@ class Covid
         // $config['allowed_types']        = 'gif|jpg|jpeg|png';
         $config['allowed_types']        = '*';
         $config['max_size']             = FILE_UPLOAD_SIZE;
-        $config['max_width']            = 1024;
-        $config['max_height']           = 1024;
+        $config['max_width']            = 10240;
+        $config['max_height']           = 10240;
         $config['encrypt_name']           = TRUE;
         // $this->load->library('upload', $config);
         $CI->load->library('upload', $config);
@@ -64,5 +64,29 @@ class Covid
             ];
             return $result;
         }
+    }
+
+    public function alert_message($status, $type, $message)
+    {
+        $CI = &get_instance();
+        if ($status == 'success') {
+            $CI->session->set_flashdata('alert', $this->_alert_template($type, $message));
+        } else {
+            $CI->session->set_flashdata('alert', $this->_alert_template($type, $message));
+        }
+    }
+
+    private function _alert_template($type, $message)
+    {
+        $template = "
+        <div class='alert {$type} alert-dismissible fade show' role='alert'>
+            {$message}
+            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+            <span aria-hidden='true'>&times;</span>
+            </button>
+        </div>
+        ";
+
+        return $template;
     }
 }
