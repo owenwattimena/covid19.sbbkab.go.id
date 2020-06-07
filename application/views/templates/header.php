@@ -10,7 +10,7 @@
     <meta name="description"
         content="Informasi Corona Virus Disease 2019 (COVID-19) di Kabupaten Seram Bagian Barat (SBB).">
     <meta name="keywords"
-        content="Corona 2019, Corona Virus Disease 2019, COVID-19, Seram Bagian Barat, SBB, Provinsi Maluku, Indonesia">
+        content="Corona SBB, Covid SBB, Corona Seram Bagian Barat, Covid Seram Bagian Barat, Corona Virus Disease 2019 SBB, COVID-19 SBB, Seram Bagian Barat, SBB, Provinsi Maluku, Indonesia">
     <meta name="robots" content="index, follow">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta charset="utf-8">
