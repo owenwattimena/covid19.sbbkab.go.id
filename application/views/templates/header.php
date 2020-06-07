@@ -4,7 +4,15 @@
 <head>
     <link rel="icon"
         href="<?= (isset($pengaturan[0]->logo) && $pengaturan[0]->logo != null) ? base_url('/uploads/pengaturan/img/' . $pengaturan[0]->logo) : base_url('/uploads/pengaturan/img/logo-default.jpg') ?>">
-    <title>Covid19 - SBB</title>
+    <title>
+        <?= (isset($pengaturan[0]->site_title) && $pengaturan[0]->site_title != null) ? $pengaturan[0]->site_title : '' ?>
+        | Covid 19 - Seram Bagian Barat</title>
+    <meta name="description"
+        content="Informasi Corona Virus Disease 2019 (COVID-19) di Kabupaten Seram Bagian Barat (SBB).">
+    <meta name="keywords"
+        content="Corona 2019, Corona Virus Disease 2019, COVID-19, Seram Bagian Barat, SBB, Provinsi Maluku, Indonesia">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
