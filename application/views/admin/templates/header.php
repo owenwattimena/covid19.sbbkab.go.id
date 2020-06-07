@@ -1,7 +1,7 @@
 <?php
 $CI = &get_instance();
-$this->load->model('general_model');
-$pengaturan = $this->general_model->get('pengaturan');
+$CI->load->model('general_model');
+$pengaturan = $CI->general_model->get('pengaturan');
 ?>
 
 <!DOCTYPE html>
