@@ -1,3 +1,13 @@
+<?php
+
+$CI = &get_instance();
+$CI->load->model('general_model');
+$kontak = $CI->general_model->get_where('kontak', ['type' => 'kontak']);
+$sosmed = $CI->general_model->get_where('kontak', ['type' => 'sosmed']);
+$pengaturan = $CI->general_model->get('pengaturan');
+
+?>
+
 </section>
 
 <footer class="ftco-section ftco-section-2 bg-dark">
@@ -9,7 +19,9 @@
                     <li>
                         <h5 class="text-sandybrown">Kontak</h5>
                     </li>
-                    <li> <i class="fa fa-building"></i> Dinas kesehatan Kabupaten SBB</li>
+                    <?php foreach ($kontak as $key => $value) :  ?>
+                    <li> <i class="<?= $value->icon ?>"></i> <?= $value->text ?></li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
             <div class="col-md-4">
@@ -17,14 +29,17 @@
                     <li>
                         <h5 class="text-sandybrown">Media Sosial</h5>
                     </li>
-                    <li> <i class="fa fa-facebook"></i> @dkkdemak</li>
+                    <?php foreach ($sosmed as $key => $value) : ?>
+                    <li> <i class="<?= $value->icon ?>"></i>
+                        <?= $value->text ?></>
+                        <?php endforeach; ?>
                 </ul>
             </div>
         </div>
     </div>
 </footer>
 <div class="bg-darknes copy-right py-3 text-center">
-    Copyright 2020
+    Copyright &copy; <?= date('Y') ?> . <p class="mb-0 pb-0"><?= $pengaturan ? $pengaturan[0]->footer : '' ?></p>
 </div>
 
 </div>

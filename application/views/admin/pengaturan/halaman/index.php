@@ -66,6 +66,15 @@ die; */ ?>
                                 value="<?= $pengaturan ? $pengaturan[0]->banner_subtitle : '' ?>">
                         </div>
                     </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-4">
+                            <label for="footer">Footer</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input type="text" name="footer" id="footer" class="form-control" placeholder="Footer"
+                                value="<?= $pengaturan ? $pengaturan[0]->footer : '' ?>">
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-sm-4">
                         </div>

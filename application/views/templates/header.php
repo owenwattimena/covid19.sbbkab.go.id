@@ -30,6 +30,9 @@
     <link rel="stylesheet" href="<?= base_url() ?>/assets/site/css/style.css">
     <link rel="stylesheet" href="<?= base_url() ?>/assets/site/css/style.me.css">
 
+    <link rel="stylesheet" href="<?= base_url('/assets/admin') ?>/plugins/fontawesome-free/css/all.min.css">
+
+
     <script src="<?= base_url() ?>/assets/site/js/jquery.min.js"></script>
 
 </head>

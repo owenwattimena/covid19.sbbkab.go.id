@@ -403,6 +403,32 @@ class Api extends CI_Controller
     }
 
 
+    public function getKontak()
+    {
+        $data = $this->general_model->get('kontak');
+        echo json_encode($data);
+    }
+
+    public function postKontak()
+    {
+        // echo json_encode($_POST);
+        // die;
+        $table = 'kontak';
+        if ($this->input->post()) {
+            $post = $this->input->post();
+            if ($post['id'] <= 0) {
+                // create data
+                unset($post['id']);
+                $response = $this->general_model->save_data($table, $post);
+            } else {
+                $response = $this->general_model->save_data($table, $post);
+                // update data
+            }
+            echo json_encode($response);
+        }
+    }
+
+
     private function _remove_file($table, $id, $path = './uploads/media/gambar/', $field = 'source')
     {
         $data = $this->general_model->get_where($table, ['id' => $id]);

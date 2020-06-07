@@ -53,7 +53,7 @@ class Admin extends CI_Controller
      *  MENU COVID-19
      */
 
-    public function covid19($params)
+    public function covid19($params = null)
     {
         switch ($params) {
                 /**
@@ -128,6 +128,8 @@ class Admin extends CI_Controller
 
             default:
                 # code...
+                redirect('/admin/dashboard');
+
                 break;
         }
     }
@@ -207,7 +209,7 @@ class Admin extends CI_Controller
         $this->load->view('admin/templates/script');
     }
 
-    public function pengaturan($params)
+    public function pengaturan($params = null)
     {
         $this->load->model('general_model');
 
@@ -230,10 +232,21 @@ class Admin extends CI_Controller
                 $this->load->view('admin/templates/script');
                 break;
             case 'kontak':
+                $data['current_menu'] = 'Pengaturan/kontak';
+                $data['title'] = 'Kontak';
+                // die;
+
+                $this->load->view('admin/templates/header', $data);
+                $this->load->view('admin/templates/navbar');
+                $this->load->view('admin/templates/aside');
+                $this->load->view('admin/templates/content-header');
+                $this->load->view('admin/pengaturan/kontak/index', $data);
+                $this->load->view('admin/templates/footer');
+                $this->load->view('admin/templates/script');
                 break;
 
             default:
-                # code...
+                redirect('/admin/dashboard');
                 break;
         }
     }

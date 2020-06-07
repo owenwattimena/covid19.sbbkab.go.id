@@ -26,6 +26,9 @@ class General_model extends CI_Model
 
     public function save_data($table, $data)
     {
+        // echo json_encode($data);
+        // die;
+
         $status = '';
         $message = '';
 
