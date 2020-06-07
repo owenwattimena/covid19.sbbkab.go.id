@@ -1,7 +1,15 @@
+<?php
+$CI = &get_instance();
+$this->load->model('general_model');
+$pengaturan = $this->general_model->get('pengaturan');
+?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
+    <link rel="icon"
+        href="<?= (isset($pengaturan[0]->logo) && $pengaturan[0]->logo != null) ? base_url('/uploads/pengaturan/img/' . $pengaturan[0]->logo) : base_url('/uploads/pengaturan/img/logo-default.jpg') ?>">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>SBB Siaga Covid19 | Admin</title>
